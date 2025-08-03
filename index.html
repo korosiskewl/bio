@@ -1,123 +1,232 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My AI Projects</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-export default function AIShowcase() {
-  useEffect(() => {
-    document.title = "My AI Projects";
-  }, []);
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #000000;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  main {
+    padding: 3rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
 
-  return (
-    <main className="relative min-h-screen bg-black text-white px-6 py-10 font-sans overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative z-10 text-center mb-24">
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-5xl font-bold tracking-wide mb-4"
-        >
-          Explore My AI Creations
-        </motion.h1>
+  /* Hero */
+  header {
+    text-align: center;
+    max-width: 720px;
+  }
+  header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+    color: #ff0000;
+    text-shadow:
+      0 0 6px #ff0000,
+      0 0 12px #ff0000,
+      0 0 18px #ff0000;
+  }
+  header p {
+    font-size: 1.25rem;
+    color: #ddd;
+    text-shadow: 0 0 10px #ff0000aa;
+  }
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="text-lg text-gray-300"
-          style={{ textShadow: "0 0 10px #ff0000" }}
-        >
-          From vision to voice, experience humanlike AI tools built by one mind.
-        </motion.p>
-      </section>
+  /* Projects container */
+  section.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 960px;
+    width: 100%;
+  }
 
-      {/* Projects Section */}
-      <section className="relative z-10 flex flex-col md:flex-row gap-10 justify-center">
-        {[{
-          title: "🧠 Visionized",
-          desc: "Free image vision — global access coming soon!",
-          btnText: "Join Discord",
-          btnVariant: "outline",
-          btnClass: "border-red-600 text-red-400 hover:bg-red-900/30",
-          disabled: false,
-          shadowHover: "hover:shadow-red-600/40",
-        }, {
-          title: "🎤 AI Song Cover Generator",
-          desc: "This private project generates full AI song covers using custom voices. Not publicly available.",
-          btnText: "Private Project",
-          btnVariant: "outline",
-          btnClass: "border-gray-500 text-gray-400 cursor-not-allowed",
-          disabled: true,
-          shadowHover: "hover:shadow-red-600/40",
-        }].map(({title, desc, btnText, btnVariant, btnClass, disabled, shadowHover}, i) => (
-          <motion.div
-            key={title}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ duration: 0.6, delay: i * 0.2 }}
-            className={`flex-1 ${shadowHover}`}
-            whileHover={{ scale: disabled ? 1 : 1.03 }}
-          >
-            <Card
-              className={`bg-black/90 backdrop-blur-sm p-6 rounded-2xl border border-red-600 shadow-xl transition-shadow h-full`}
-            >
-              <CardContent>
-                <motion.h2
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 + i * 0.2 }}
-                  className="text-2xl font-semibold mb-2"
-                >
-                  {title}
-                </motion.h2>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 + i * 0.2 }}
-                  className="text-gray-300 mb-4"
-                >
-                  {desc}
-                </motion.p>
-                <motion.div
-                  whileHover={disabled ? {} : { scale: 1.1, boxShadow: "0 0 12px #ff0000" }}
-                  whileTap={disabled ? {} : { scale: 0.95 }}
-                >
-                  <Button
-                    variant={btnVariant}
-                    className={btnClass}
-                    disabled={disabled}
-                  >
-                    {btnText}
-                  </Button>
-                </motion.div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </section>
+  /* Cards */
+  .card {
+    background: #111;
+    border: 2px solid #ff0000;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 320px;
+    box-shadow:
+      0 0 10px #ff000040;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 20px #ff0000cc,
+      0 0 30px #ff0000cc,
+      0 0 40px #ff0000cc;
+    cursor: pointer;
+  }
 
-      {/* About Section */}
-      <section className="relative z-10 mt-24 text-center max-w-2xl mx-auto">
-        <motion.h3
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          className="text-3xl font-bold mb-4"
-          style={{ textShadow: "0 0 8px #ff0000" }}
-        >
-          Who Made This?
-        </motion.h3>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.9 }}
-          className="text-gray-400"
-          style={{ textShadow: "0 0 6px #aa0000" }}
-        >
-          I’m a creator building powerful and humanlike AI tools. I love crafting beautiful interfaces that make people say "wait... that’s AI?!"
-        </motion.p>
-      </section>
-    </main>
-  );
-}
+  .card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: #ff4d4d;
+    text-shadow: 0 0 6px #ff0000cc;
+  }
+
+  .card p {
+    flex-grow: 1;
+    color: #eee;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  /* Buttons */
+  .btn {
+    border: 2px solid #ff0000;
+    background: transparent;
+    color: #ff0000;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    user-select: none;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+  }
+  .btn:hover:not(.disabled) {
+    background-color: #ff000022;
+    box-shadow:
+      0 0 8px #ff0000,
+      0 0 16px #ff0000;
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  .btn.disabled {
+    border-color: #555;
+    color: #555;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+  }
+
+  /* About Section */
+  section.about {
+    max-width: 720px;
+    text-align: center;
+    color: #aaa;
+    text-shadow: 0 0 8px #ff000055;
+  }
+  section.about h3 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    color: #ff4444;
+    text-shadow:
+      0 0 8px #ff0000cc,
+      0 0 16px #ff0000cc;
+  }
+  section.about p {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .card {
+      width: 100%;
+    }
+  }
+
+  /* Floating animated blobs behind content */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    pointer-events: none;
+    animation: floatblob 15s ease-in-out infinite;
+  }
+  .blob1 {
+    width: 280px;
+    height: 280px;
+    background: #ff0000aa;
+    top: 10%;
+    left: 25%;
+  }
+  .blob2 {
+    width: 360px;
+    height: 360px;
+    background: #ff4d4daa;
+    bottom: 8%;
+    right: 20%;
+    animation-delay: 7.5s;
+  }
+  @keyframes floatblob {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(30px, -20px);
+    }
+    50% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(-30px, 20px);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <main>
+    <header>
+      <h1>Explore My AI Creations</h1>
+      <p>From vision to voice, experience humanlike AI tools built by one mind.</p>
+    </header>
+
+    <section class="projects">
+      <article class="card" tabindex="0" role="region" aria-label="Visionized project">
+        <h2>🧠 Visionized</h2>
+        <p>Free image vision — global access coming soon!</p>
+        <button class="btn" onclick="window.open('https://discord.gg/your-invite', '_blank')">Join Discord</button>
+      </article>
+
+      <article class="card" tabindex="0" role="region" aria-label="AI Song Cover Generator project">
+        <h2>🎤 AI Song Cover Generator</h2>
+        <p>This private project generates full AI song covers using custom voices. Not publicly available.</p>
+        <button class="btn disabled" disabled>Private Project</button>
+      </article>
+    </section>
+
+    <section class="about" aria-label="About the creator">
+      <h3>Who Made This?</h3>
+      <p>I’m a creator building powerful and humanlike AI tools. I love crafting beautiful interfaces that make people say "wait... that’s AI?!"</p>
+    </section>
+  </main>
+</body>
+</html>
